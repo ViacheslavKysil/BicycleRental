@@ -15,13 +15,13 @@ namespace BicycleRental.Infrastructure.Database
             Database.EnsureCreated();
         }
 
-        public DbSet<Bicycle> Bicycles { get; set; }
         public DbSet<TypeBicycle> TypeBicycles { get; set; }
+        public DbSet<Bicycle> Bicycles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new BicycleConfiguration());
             modelBuilder.ApplyConfiguration(new TypeBicycleConfiguration());
+            modelBuilder.ApplyConfiguration(new BicycleConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

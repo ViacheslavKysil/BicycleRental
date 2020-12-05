@@ -11,11 +11,12 @@ namespace BicycleRental.Core.AutoMapper
     {
         public CoreMapperProfile()
         {
-            CreateMap<Bicycle, BicycleDto>();
+            CreateMap<Bicycle, BicycleDto>()
+                .ForMember(dest => dest.RentalType,
+                    opt => opt.MapFrom(x => x.TypeBicycle.Name));
             CreateMap<BicycleDto, Bicycle>();
 
             CreateMap<TypeBicycle, TypeBicycleDto>();
-            CreateMap<TypeBicycleDto, TypeBicycle>();
         }
     }
 }

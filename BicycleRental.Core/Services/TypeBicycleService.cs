@@ -29,13 +29,6 @@ namespace BicycleRental.Core.Services
             return _mapper.Map<TypeBicycleDto>(bicycleTypeModel);
         }
 
-        public async Task<string> GetTypeBicycle2(Guid id)
-        {
-            var typeBicycle = await _unitOfWork.TypeBicycles.SingleAsync(b => b.Id == id);
-
-            return typeBicycle.Name;
-        }
-
         public async Task<IEnumerable<string>> GetAvailableBicycles()
         {
             var typeBicycles = await _unitOfWork.TypeBicycles.GetAllAsync();

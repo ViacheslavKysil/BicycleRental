@@ -7,6 +7,7 @@ using BicycleRental.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,48 +29,20 @@ namespace BicycleRental.Core.Services
 
         public async Task<IEnumerable<BicycleDto>> GetAvailableBicycles()
         {
-            //var bicycles = await _unitOfWork.Bicycles.GetAllAsync(g => g
-            //    .Include(igg => igg.TypeBicycle).ThenInclude(ig => ig.Name));
-            var bicycles = await _unitOfWork.Bicycles.GetAllAsync();
+            var bicycles = await _unitOfWork.Bicycles.GetAllAsync(b => b.Include(x => x.TypeBicycle));
 
             var availableBicycles = bicycles.Where(b => b.RentalStatus == RentalStatus.Free);
 
-            var bicycleDtos = new List<BicycleDto>();
-
-            foreach (var item in availableBicycles)
-            {
-                bicycleDtos.Add(new BicycleDto
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Price = item.Price,
-                    RentalType = await _typeBicycleService.GetTypeBicycle2(item.TypeBicycleId)
-                });
-            }
-
-            return bicycleDtos;
+            return _mapper.Map<IEnumerable<BicycleDto>>(availableBicycles);
         }
 
         public async Task<IEnumerable<BicycleDto>> GetRentedBicycles()
         {
-            var bicycles = await _unitOfWork.Bicycles.GetAllAsync();
+            var bicycles = await _unitOfWork.Bicycles.GetAllAsync(b => b.Include(x => x.TypeBicycle));
 
-            var availableBicycles = bicycles.Where(b => b.RentalStatus == RentalStatus.Rented);
+            var rentedBicycles = bicycles.Where(b => b.RentalStatus == RentalStatus.Rented);
 
-            var bicycleDtos = new List<BicycleDto>();
-
-            foreach (var item in availableBicycles)
-            {
-                bicycleDtos.Add(new BicycleDto
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Price = item.Price,
-                    RentalType = await _typeBicycleService.GetTypeBicycle2(item.TypeBicycleId)
-                });
-            }
-
-            return bicycleDtos;
+            return _mapper.Map<IEnumerable<BicycleDto>>(rentedBicycles);
         }
 
         public async Task CreateAsync(BicycleDto bicycleDto)
