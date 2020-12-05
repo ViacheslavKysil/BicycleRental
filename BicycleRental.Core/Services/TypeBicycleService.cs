@@ -22,9 +22,9 @@ namespace BicycleRental.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<TypeBicycleDto> GetTypeBicycle(string name)
+        public async Task<TypeBicycleDto> GetTypeBicycle(string nameBicycle)
         {
-            var bicycleTypeModel = await _unitOfWork.TypeBicycles.SingleAsync(tb => tb.Name == name);
+            var bicycleTypeModel = await _unitOfWork.TypeBicycles.SingleAsync(tb => tb.Name == nameBicycle);
 
             return _mapper.Map<TypeBicycleDto>(bicycleTypeModel);
         }

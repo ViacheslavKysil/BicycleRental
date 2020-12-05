@@ -10,26 +10,26 @@ namespace BicycleRental.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationContext _applicationContext;
+        private readonly DatabaseContext _dbContext;
 
         private Repository<Bicycle> _bicycleRepository;
         private Repository<TypeBicycle> _typeBicycleRepository;
 
-        public UnitOfWork(ApplicationContext applicationContext)
+        public UnitOfWork(DatabaseContext dbContext)
         {
-            _applicationContext = applicationContext;
+            _dbContext = dbContext;
         }
 
         public IRepository<Bicycle> Bicycles => 
-            _bicycleRepository ??= new Repository<Bicycle>(_applicationContext);
+            _bicycleRepository ??= new Repository<Bicycle>(_dbContext);
 
 
         public IRepository<TypeBicycle> TypeBicycles => 
-            _typeBicycleRepository ??= new Repository<TypeBicycle>(_applicationContext);
+            _typeBicycleRepository ??= new Repository<TypeBicycle>(_dbContext);
 
         public async Task SaveAsync()
         {
-            await _applicationContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

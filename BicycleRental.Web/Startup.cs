@@ -33,15 +33,10 @@ namespace BicycleRental.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var sqlServerConnctionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<ApplicationContext>(options => options
-                .UseSqlServer(sqlServerConnctionString));
+            ConfigureSqlServer(services);
+            ConfigureServiceScope(services);
 
             services.AddControllers();
-
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IBicycleService, BicycleService>();
-            services.AddScoped<ITypeBicycleService, TypeBicycleService>();
 
             services.AddAutoMapper(typeof(CoreMapperProfile));
         }
@@ -64,6 +59,21 @@ namespace BicycleRental.Web
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void ConfigureSqlServer(IServiceCollection services)
+        {
+            var sqlServerConnectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<DatabaseContext>(options => options
+                .UseSqlServer(sqlServerConnectionString));
+        }
+
+        private void ConfigureServiceScope(IServiceCollection services)
+        {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IBicycleService, BicycleService>();
+            services.AddScoped<ITypeBicycleService, TypeBicycleService>();
         }
     }
 }

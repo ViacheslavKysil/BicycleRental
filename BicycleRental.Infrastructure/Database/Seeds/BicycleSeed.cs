@@ -23,7 +23,7 @@ namespace BicycleRental.Infrastructure.Database.Seeds
                 var bicycle = new Bicycle
                 {
                     Id = Guid.NewGuid(),
-                    Name = $"Bicycle abc{i}",
+                    Name = $"Bicycle abc{i + 1}",
                     RentalStatus = RandomHelpers.GetRentalStatus(),
                     Price = 11999 + (i * 500),
                     TypeBicycleId = TypeBicycleSeed.DataToSeed.GetRandomElement().Id

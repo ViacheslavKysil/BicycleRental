@@ -14,17 +14,17 @@ namespace BicycleRental.Infrastructure.Repositories
 {
     internal class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
-        private readonly ApplicationContext _applicationContext;
+        private readonly DatabaseContext _dbContext;
 
-        public Repository(ApplicationContext applicationContext)
+        public Repository(DatabaseContext dbContext)
         {
-            _applicationContext = applicationContext;
+            _dbContext = dbContext;
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null)
         {
-            var queryable = _applicationContext.Set<TEntity>().AsQueryable()
+            var queryable = _dbContext.Set<TEntity>().AsQueryable()
                 .Where(e => !e.IsDeleted);
 
             if (includes != null)
@@ -39,7 +39,7 @@ namespace BicycleRental.Infrastructure.Repositories
            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null,
            bool enableAsNoTracking = false)
         {
-            var queryable = _applicationContext.Set<TEntity>().AsQueryable();
+            var queryable = _dbContext.Set<TEntity>().AsQueryable();
 
             if (enableAsNoTracking)
             {
@@ -58,7 +58,7 @@ namespace BicycleRental.Infrastructure.Repositories
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null, 
             bool enableAsNoTracking = false)
         {
-            var queryable = _applicationContext.Set<TEntity>().AsQueryable()
+            var queryable = _dbContext.Set<TEntity>().AsQueryable()
                 .Where(e => !e.IsDeleted);
 
             if(enableAsNoTracking)
@@ -81,19 +81,19 @@ namespace BicycleRental.Infrastructure.Repositories
 
         public async Task CreateAsync(TEntity entity)
         {
-            await _applicationContext.Set<TEntity>().AddAsync(entity);
+            await _dbContext.Set<TEntity>().AddAsync(entity);
         }
        
         public void Update(TEntity entity)
         {
-            _applicationContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(TEntity entity)
         {
             entity.IsDeleted = true;
 
-            _applicationContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.Entry(entity).State = EntityState.Modified;
         }
     }
 }

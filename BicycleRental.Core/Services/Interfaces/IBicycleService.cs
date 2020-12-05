@@ -14,12 +14,10 @@ namespace BicycleRental.Core.Services.Interfaces
 
         Task CreateAsync(BicycleDto bicycleDto);
 
-        Task UpdateAsync(BicycleDto bicycleDto);
+        Task DeleteAsync(Guid bicycleId);
 
-        Task DeleteAsync(Guid id);
+        Task RentBicycleAsync(Guid bicycleId);
 
-        Task RentBicycleAsync(Guid id);
-
-        Task CancelRentBicycleAsync(Guid id);
+        Task CancelRentBicycleAsync(Guid bicycleId);
     }
 }

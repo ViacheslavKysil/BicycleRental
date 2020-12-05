@@ -9,7 +9,7 @@ namespace BicycleRental.Core.Services.Interfaces
 {
     public interface ITypeBicycleService
     {
-        Task<TypeBicycleDto> GetTypeBicycle(string name);
+        Task<TypeBicycleDto> GetTypeBicycle(string nameBicycle);
         Task<IEnumerable<string>> GetAvailableBicycles();
     }
 }

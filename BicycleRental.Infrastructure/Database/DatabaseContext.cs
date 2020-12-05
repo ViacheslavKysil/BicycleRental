@@ -7,9 +7,9 @@ using System.Text;
 
 namespace BicycleRental.Infrastructure.Database
 {
-    public sealed class ApplicationContext : DbContext
+    public sealed class DatabaseContext : DbContext
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
             Database.EnsureCreated();

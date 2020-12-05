@@ -59,23 +59,18 @@ namespace BicycleRental.Core.Services
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid bicycleId)
         {
-            var bicycle = await _unitOfWork.Bicycles.SingleAsync(b => b.Id == id);
+            var bicycle = await _unitOfWork.Bicycles.SingleAsync(b => b.Id == bicycleId);
 
             _unitOfWork.Bicycles.Delete(bicycle);
 
             await _unitOfWork.SaveAsync();
         }
 
-        public Task UpdateAsync(BicycleDto bicycleDto)
+        public async Task RentBicycleAsync(Guid bicycleId)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task RentBicycleAsync(Guid id)
-        {
-            var bicycle = await _unitOfWork.Bicycles.SingleAsync(b => b.Id == id);
+            var bicycle = await _unitOfWork.Bicycles.SingleAsync(b => b.Id == bicycleId);
 
             bicycle.RentalStatus = RentalStatus.Rented;
 
@@ -84,9 +79,9 @@ namespace BicycleRental.Core.Services
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task CancelRentBicycleAsync(Guid id)
+        public async Task CancelRentBicycleAsync(Guid bicycleId)
         {
-            var bicycle = await _unitOfWork.Bicycles.SingleAsync(b => b.Id == id);
+            var bicycle = await _unitOfWork.Bicycles.SingleAsync(b => b.Id == bicycleId);
 
             bicycle.RentalStatus = RentalStatus.Free;
 

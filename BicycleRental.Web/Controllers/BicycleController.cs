@@ -46,7 +46,7 @@ namespace BicycleRental.Web.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("bicycle/remove/{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
@@ -55,7 +55,7 @@ namespace BicycleRental.Web.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("bicycle/rent/{id}")]
         public async Task<IActionResult> RentAsync(Guid id)
         {
@@ -64,7 +64,7 @@ namespace BicycleRental.Web.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("bicycle/cancelRent/{id}")]
         public async Task<IActionResult> CancelRentAsync(Guid id)
         {
