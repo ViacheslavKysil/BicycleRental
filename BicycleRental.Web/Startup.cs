@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using BicycleRental.Core.AutoMapper;
 using BicycleRental.Core.Services;
@@ -11,18 +7,23 @@ using BicycleRental.Infrastructure.Repositories;
 using BicycleRental.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace BicycleRental.Web
 {
+    /// <summary>
+    /// Configures the application, configures the services that the application will use,
+    /// and installs components to handle the request or middleware.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup" /> class.
+        /// </summary>
+        /// <param name="configuration"> Interface for configuration application properties. </param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,7 +31,7 @@ namespace BicycleRental.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // Adds services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureSqlServer(services);
@@ -41,7 +42,7 @@ namespace BicycleRental.Web
             services.AddAutoMapper(typeof(CoreMapperProfile));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // Configures the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

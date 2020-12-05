@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using BicycleRental.Domain.Contracts;
 using BicycleRental.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BicycleRental.Core.AutoMapper
 {
+    /// <summary>
+    /// Class containing the mapping settings for core layer using AutoMapper.
+    /// </summary>
     public class CoreMapperProfile : Profile
     {
         public CoreMapperProfile()

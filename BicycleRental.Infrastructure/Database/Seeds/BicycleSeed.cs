@@ -1,13 +1,14 @@
 ﻿using BicycleRental.Domain.Entities;
-using BicycleRental.Domain.Enums;
 using BicycleRental.Infrastructure.Helpers.Randoms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace BicycleRental.Infrastructure.Database.Seeds
 {
+    /// <summary>
+    /// Static class that generates values for seeding Bicycle table.
+    /// </summary>
     internal static class BicycleSeed
     {
         internal static readonly ICollection<Bicycle> DataToSeed;

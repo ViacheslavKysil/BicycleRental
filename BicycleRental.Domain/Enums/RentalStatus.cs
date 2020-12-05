@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BicycleRental.Domain.Enums
+﻿namespace BicycleRental.Domain.Enums
 {
+    /// <summary>
+    /// An enumeration containing all possible rental statuses.
+    /// </summary>
     public enum RentalStatus
     {
-        Free,
+        Free = 1,
         Rented
     }
 }

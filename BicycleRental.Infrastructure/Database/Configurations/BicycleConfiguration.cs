@@ -2,12 +2,12 @@
 using BicycleRental.Infrastructure.Database.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BicycleRental.Infrastructure.Database.Configurations
 {
+    /// <summary>
+    /// Class containing configurations for table Bicycle.
+    /// </summary>
     public class BicycleConfiguration : IEntityTypeConfiguration<Bicycle>
     {
         public void Configure(EntityTypeBuilder<Bicycle> builder)

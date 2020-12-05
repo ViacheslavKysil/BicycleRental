@@ -1,14 +1,18 @@
 ﻿using BicycleRental.Domain.Entities;
 using BicycleRental.Infrastructure.Database.Configurations;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BicycleRental.Infrastructure.Database
 {
+    /// <summary>
+    /// Provides access to database.
+    /// </summary>
     public sealed class DatabaseContext : DbContext
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DatabaseContext" /> class.
+        /// </summary>
+        /// <param name="options"> Options for connecting to database. </param>
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {

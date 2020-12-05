@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace BicycleRental.Infrastructure.Database.Seeds
 {
+    /// <summary>
+    /// Static class that generates values for seeding TypeBicycle table.
+    /// </summary>
     internal static class TypeBicycleSeed
     {
         internal static readonly ICollection<TypeBicycle> DataToSeed;
