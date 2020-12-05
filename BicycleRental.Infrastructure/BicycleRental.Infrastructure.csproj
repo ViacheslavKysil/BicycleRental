@@ -10,8 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\Configurations\" />
-    <Folder Include="Database\Seeds\" />
+    <ProjectReference Include="..\BicycleRental.Domain\BicycleRental.Domain.csproj" />
   </ItemGroup>
 
 </Project>

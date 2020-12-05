@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BicycleRental.Infrastructure.Entities
+namespace BicycleRental.Domain.Entities
 {
     public class TypeBicycle : BaseEntity
     {

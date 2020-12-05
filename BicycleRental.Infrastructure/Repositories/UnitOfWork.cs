@@ -1,9 +1,10 @@
-﻿using BicycleRental.Infrastructure.Database;
-using BicycleRental.Infrastructure.Entities;
+﻿using BicycleRental.Domain.Entities;
+using BicycleRental.Infrastructure.Database;
 using BicycleRental.Infrastructure.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BicycleRental.Infrastructure.Repositories
 {
@@ -28,9 +29,9 @@ namespace BicycleRental.Infrastructure.Repositories
         public IRepository<TypeBicycle> TypeBicycles => 
             _typeBicycleRepository ??= new Repository<TypeBicycle>(_applicationContext);
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _applicationContext.SaveChanges();
+            await _applicationContext.SaveChangesAsync();
         }
     }
 }

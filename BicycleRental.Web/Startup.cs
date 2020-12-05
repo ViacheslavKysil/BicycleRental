@@ -2,10 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using BicycleRental.Core.AutoMapper;
+using BicycleRental.Core.Services;
+using BicycleRental.Core.Services.Interfaces;
+using BicycleRental.Infrastructure.Database;
+using BicycleRental.Infrastructure.Repositories;
+using BicycleRental.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +33,17 @@ namespace BicycleRental.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var sqlServerConnctionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ApplicationContext>(options => options
+                .UseSqlServer(sqlServerConnctionString));
+
             services.AddControllers();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IBicycleService, BicycleService>();
+            services.AddScoped<ITypeBicycleService, TypeBicycleService>();
+
+            services.AddAutoMapper(typeof(CoreMapperProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

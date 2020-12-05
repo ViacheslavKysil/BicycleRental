@@ -1,5 +1,5 @@
-﻿using BicycleRental.Infrastructure.Database;
-using BicycleRental.Infrastructure.Entities;
+﻿using BicycleRental.Domain.Entities;
+using BicycleRental.Infrastructure.Database;
 using BicycleRental.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BicycleRental.Infrastructure.Repositories
 {
@@ -20,7 +21,40 @@ namespace BicycleRental.Infrastructure.Repositories
             _applicationContext = applicationContext;
         }
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate, 
+        public async Task<IEnumerable<TEntity>> GetAllAsync(
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null)
+        {
+            var queryable = _applicationContext.Set<TEntity>().AsQueryable()
+                .Where(e => !e.IsDeleted);
+
+            if (includes != null)
+            {
+                queryable = includes(queryable);
+            }
+
+            return await queryable.ToListAsync();
+        }
+
+        public async Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> predicate,
+           Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null,
+           bool enableAsNoTracking = false)
+        {
+            var queryable = _applicationContext.Set<TEntity>().AsQueryable();
+
+            if (enableAsNoTracking)
+            {
+                queryable = queryable.AsNoTracking();
+            }
+
+            if (includes != null)
+            {
+                queryable = includes(queryable);
+            }
+
+            return await queryable.SingleOrDefaultAsync(predicate);
+        }
+
+        public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, 
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null, 
             bool enableAsNoTracking = false)
         {
@@ -42,22 +76,24 @@ namespace BicycleRental.Infrastructure.Repositories
                 queryable = queryable.Where(predicate);
             }
 
-            return queryable;
+            return await queryable.ToListAsync();
         }
 
-        public void Create(TEntity entity)
+        public async Task CreateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            await _applicationContext.Set<TEntity>().AddAsync(entity);
         }
        
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _applicationContext.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            entity.IsDeleted = true;
+
+            _applicationContext.Entry(entity).State = EntityState.Modified;
         }
     }
 }

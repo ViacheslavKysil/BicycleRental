@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BicycleRental.Infrastructure.Entities
+namespace BicycleRental.Domain.Contracts
 {
-    public class RentalStatus : BaseEntity
+    public class TypeBicycleDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }

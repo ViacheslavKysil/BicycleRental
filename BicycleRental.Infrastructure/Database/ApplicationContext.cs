@@ -1,4 +1,5 @@
-﻿using BicycleRental.Infrastructure.Entities;
+﻿using BicycleRental.Domain.Entities;
+using BicycleRental.Infrastructure.Database.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,14 @@ namespace BicycleRental.Infrastructure.Database
         public DbSet<Bicycle> Bicycles { get; set; }
         public DbSet<TypeBicycle> TypeBicycles { get; set; }
         public DbSet<RentalStatus> RentalStatuses { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new BicycleConfiguration());
+            modelBuilder.ApplyConfiguration(new RentalStatusConfiguration());
+            modelBuilder.ApplyConfiguration(new TypeBicycleConfiguration());
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

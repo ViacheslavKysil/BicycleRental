@@ -1,7 +1,8 @@
-﻿using BicycleRental.Infrastructure.Entities;
+﻿using BicycleRental.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BicycleRental.Infrastructure.Repositories.Interfaces
 {
@@ -12,5 +13,7 @@ namespace BicycleRental.Infrastructure.Repositories.Interfaces
         IRepository<RentalStatus> RentalStatuses { get; }
 
         IRepository<TypeBicycle> TypeBicycles { get; }
+
+        Task SaveAsync();
     }
 }
