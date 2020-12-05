@@ -10,8 +10,6 @@ namespace BicycleRental.Infrastructure.Repositories.Interfaces
     {
         IRepository<Bicycle> Bicycles { get; }
 
-        IRepository<RentalStatus> RentalStatuses { get; }
-
         IRepository<TypeBicycle> TypeBicycles { get; }
 
         Task SaveAsync();

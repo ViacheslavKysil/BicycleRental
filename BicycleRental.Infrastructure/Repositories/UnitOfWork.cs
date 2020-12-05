@@ -13,7 +13,6 @@ namespace BicycleRental.Infrastructure.Repositories
         private readonly ApplicationContext _applicationContext;
 
         private Repository<Bicycle> _bicycleRepository;
-        private Repository<RentalStatus> _rentalStatusRepository;
         private Repository<TypeBicycle> _typeBicycleRepository;
 
         public UnitOfWork(ApplicationContext applicationContext)
@@ -21,10 +20,9 @@ namespace BicycleRental.Infrastructure.Repositories
             _applicationContext = applicationContext;
         }
 
-        public IRepository<Bicycle> Bicycles => _bicycleRepository ??= new Repository<Bicycle>(_applicationContext);
+        public IRepository<Bicycle> Bicycles => 
+            _bicycleRepository ??= new Repository<Bicycle>(_applicationContext);
 
-        public IRepository<RentalStatus> RentalStatuses => 
-           _rentalStatusRepository ??= new Repository<RentalStatus>(_applicationContext);
 
         public IRepository<TypeBicycle> TypeBicycles => 
             _typeBicycleRepository ??= new Repository<TypeBicycle>(_applicationContext);

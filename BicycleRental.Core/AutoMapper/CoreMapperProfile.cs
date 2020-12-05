@@ -14,9 +14,6 @@ namespace BicycleRental.Core.AutoMapper
             CreateMap<Bicycle, BicycleDto>();
             CreateMap<BicycleDto, Bicycle>();
 
-            CreateMap<RentalStatus, RentalStatusDto>();
-            CreateMap<RentalStatusDto, RentalStatus>();
-
             CreateMap<TypeBicycle, TypeBicycleDto>();
             CreateMap<TypeBicycleDto, TypeBicycle>();
         }

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BicycleRental.Web.Controllers
 {
-    //[Route("api/[controller]")]
     [ApiController]
     public class TypeBicycleController : ControllerBase
     {

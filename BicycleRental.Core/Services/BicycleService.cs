@@ -2,6 +2,7 @@
 using BicycleRental.Core.Services.Interfaces;
 using BicycleRental.Domain.Contracts;
 using BicycleRental.Domain.Entities;
+using BicycleRental.Domain.Enums;
 using BicycleRental.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -31,7 +32,7 @@ namespace BicycleRental.Core.Services
             //    .Include(igg => igg.TypeBicycle).ThenInclude(ig => ig.Name));
             var bicycles = await _unitOfWork.Bicycles.GetAllAsync();
 
-            var availableBicycles = bicycles.Where(b => b.Status == 0);
+            var availableBicycles = bicycles.Where(b => b.RentalStatus == RentalStatus.Free);
 
             var bicycleDtos = new List<BicycleDto>();
 
@@ -53,7 +54,7 @@ namespace BicycleRental.Core.Services
         {
             var bicycles = await _unitOfWork.Bicycles.GetAllAsync();
 
-            var availableBicycles = bicycles.Where(b => b.Status == 1);
+            var availableBicycles = bicycles.Where(b => b.RentalStatus == RentalStatus.Rented);
 
             var bicycleDtos = new List<BicycleDto>();
 
@@ -78,7 +79,7 @@ namespace BicycleRental.Core.Services
             var bicycleTypeModel = await _typeBicycleService.GetTypeBicycle(bicycleDto.RentalType);
 
             bicycleModel.TypeBicycleId = bicycleTypeModel.Id;
-            bicycleModel.Status = 0;
+            bicycleModel.RentalStatus = RentalStatus.Free;
 
             await _unitOfWork.Bicycles.CreateAsync(bicycleModel);
 
@@ -103,7 +104,7 @@ namespace BicycleRental.Core.Services
         {
             var bicycle = await _unitOfWork.Bicycles.SingleAsync(b => b.Id == id);
 
-            bicycle.Status = 1;
+            bicycle.RentalStatus = RentalStatus.Rented;
 
             _unitOfWork.Bicycles.Update(bicycle);
 
@@ -114,7 +115,7 @@ namespace BicycleRental.Core.Services
         {
             var bicycle = await _unitOfWork.Bicycles.SingleAsync(b => b.Id == id);
 
-            bicycle.Status = 0;
+            bicycle.RentalStatus = RentalStatus.Free;
 
             _unitOfWork.Bicycles.Update(bicycle);
 
