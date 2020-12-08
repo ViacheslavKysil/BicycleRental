@@ -1,0 +1,41 @@
+
+<main>
+<div class="main-wrapper d-flex flex-column">
+    <section class="d-flex justify-content-center mb-4 mt-5">
+            <div style="width: 802px">
+                <div class="h3">Awesome Bike Rental</div>
+            </div>
+        </section>
+
+        <section class="d-flex justify-content-center mb-4">
+            <div style="width: 802px;">
+                <p class="h4 mb-3">🤑 Create new rent</p>
+                <app-create-rent></app-create-rent>
+            </div>
+        </section>
+
+        <section class="d-flex justify-content-center mb-4">
+            <div style="width: 802px;">
+                <p class="h4 mb-3">🤩 Your rent (Total: {{ total | currency }})</p>
+                <app-rent
+                    *ngFor="let bicycle of bicyclesRented"
+                    [id]="bicycle.id"
+                    [name]="bicycle.name"
+                    [price]="bicycle.price"
+                    [rentalType]="bicycle.rentalType"></app-rent>
+            </div>
+        </section>
+
+        <section class="d-flex justify-content-center">
+            <div style="width: 802px;">
+                <p class="h4 mb-3">🚲 Available bicycles ({{ bicyclesAvailable }})</p>
+                <app-bicycle 
+                    *ngFor="let bicycle of bicycles"
+                    [id]="bicycle.id"
+                    [name]="bicycle.name"
+                    [price]="bicycle.price"
+                    [rentalType]="bicycle.rentalType"></app-bicycle>
+            </div>
+        </section>
+    </div>
+</main>

@@ -1,0 +1,65 @@
+<div>
+  <div class="rent d-flex align-items-center mb-3">
+    <form [formGroup]="bicycleForm" (ngSubmit)="onSubmit()" class="d-flex align-items-center">
+      <div style="width: 225px" class="mb-4 ml-4 mr-3">
+        <label for="bikeName" class="form-label mb-1">Bike name</label>
+        <input
+          type="text"
+          class="form-control"
+          style="height: 40px"
+          id="bikeName"
+          placeholder="Ex. Cannondale S6"
+          formControlName="bikeName"
+        />
+      </div>
+
+      <div style="width: 225px" class="mr-3 mb-4">
+        <label for="bikeType" class="form-label mb-1">Bike type</label> 
+        <select
+          class="form-select custom-select"
+          aria-label="Default select example"
+          formControlName="bikeType"
+          id="bikeType"
+        >
+          <option *ngFor="let type of bikeTypeStates">{{ type }}</option>
+        </select>
+      </div>
+
+      <div style="width: 150px" class="mb-4 mr-3">
+        <label for="rentPrice" class="form-label mb-1">Rent Price</label>
+        <input
+          type="number"
+          step="0.01"
+          class="form-control"
+          id="rentPrice"
+          placeholder="99.00"
+          formControlName="price"
+        />
+      </div>
+
+      <div>
+        <button
+        type="submit"
+          class="btn btn-success"
+          style="
+            background-color: rgb(98, 199, 177);
+            border-color: rgb(98, 199, 177);
+          "
+          [disabled]="!bicycleForm.valid"
+        >
+          Submit rent
+        </button>
+      </div>
+    </form>
+
+    <!--
+        <div class="info flex-grow-1 ml-3">
+            Superfast bicycle / Custom / $12.99
+        </div>
+        <div class="panel">
+            <button class="btn btn-primary mr-3" style="width: 115px;">Rent</button>
+            <button class="btn btn-danger mr-3" style="width: 115px;">Delete</button>
+        </div>  
+        -->
+  </div>
+</div>

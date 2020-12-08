@@ -20,6 +20,7 @@ namespace BicycleRental.Web
     /// </summary>
     public class Startup
     {
+        private const string AllCors = "All";
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup" /> class.
         /// </summary>
@@ -40,6 +41,11 @@ namespace BicycleRental.Web
             services.AddControllers();
 
             services.AddAutoMapper(typeof(CoreMapperProfile));
+
+            services.AddCors(options => options.AddPolicy(AllCors, build => build
+                .AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowAnyMethod()));
         }
 
         // Configures the HTTP request pipeline.
@@ -49,6 +55,8 @@ namespace BicycleRental.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors();
 
             app.UseHttpsRedirection();
 

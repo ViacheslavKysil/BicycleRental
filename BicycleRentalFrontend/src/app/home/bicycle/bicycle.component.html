@@ -1,0 +1,19 @@
+<div>
+    <div class="bicycle d-flex align-items-center mb-3">
+        <div class="info flex-grow-1 ml-3">
+            {{ name }} / {{ rentalType }} / {{ price | currency }}
+        </div>
+        <div class="panel">
+            <button 
+                class="btn btn-primary mr-3" 
+                style="width: 115px; background-color: rgb(42, 71, 165); border-color: rgb(42, 71, 165);"
+                (click)="rent()"
+                >Rent</button>
+            <button 
+                class="btn btn-danger mr-3" 
+                style="width: 115px;"
+                (click)="deleteRent()"
+                >Delete</button>
+        </div>
+    </div>
+</div>

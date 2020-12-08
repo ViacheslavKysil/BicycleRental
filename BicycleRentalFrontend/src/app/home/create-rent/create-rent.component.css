@@ -1,0 +1,11 @@
+.rent {
+    border: 1px solid rgb(218, 218, 218);
+    background-color: rgb(235, 235, 238);
+    border-radius: 5px;
+    height: 110px;
+    width: 800px;
+}
+
+.custom-select {
+    width: 220px;
+}
