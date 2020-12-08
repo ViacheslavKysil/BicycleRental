@@ -56,7 +56,7 @@ namespace BicycleRental.Web
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors();
+            app.UseCors(AllCors);
 
             app.UseHttpsRedirection();
 

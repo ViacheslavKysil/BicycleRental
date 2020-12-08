@@ -121,5 +121,8 @@
       }
     }
   },
-  "defaultProject": "bicycle-rental-frontend"
+  "defaultProject": "bicycle-rental-frontend",
+  "cli": {
+    "analytics": "f1a9d1e2-8d45-4a22-9d37-73031790b16c"
+  }
 }

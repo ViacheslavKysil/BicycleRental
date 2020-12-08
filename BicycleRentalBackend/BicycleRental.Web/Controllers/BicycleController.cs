@@ -53,7 +53,7 @@ namespace BicycleRental.Web.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("bicycle/rent/{id}")]
         public async Task<IActionResult> RentAsync(Guid id)
         {
@@ -62,7 +62,7 @@ namespace BicycleRental.Web.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("bicycle/cancelRent/{id}")]
         public async Task<IActionResult> CancelRentAsync(Guid id)
         {

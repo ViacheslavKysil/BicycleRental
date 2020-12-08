@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class HttpService {
-  readonly ROOT_URL = "https://localhost:5001";
+  readonly ROOT_URL = "https://localhost:44344";
 
   constructor(private httpClient: HttpClient) { }
 
